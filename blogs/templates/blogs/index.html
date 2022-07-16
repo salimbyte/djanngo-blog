@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+MicroTape ~ Blogs
+{% endblock title %}
+
+{% block content %}
+
+<!-- displaying message -->
+<div class="mt-5">
+  <div class="container mx-auto px-4 py-10 flex items-end">
+
+
+
+
+    {% for blog in blogs %}
+    <div class="card blog">
+
+
+      <div class="card-header blog-header p-1">
+        <div class="row mt-2 m-0 p-0">
+          <div class="col-6 col-md-6 col-sm-6 text-start">
+
+            {% if blog.author.profile_picture %}
+            <img style="border-radius: 50%" width="45" src="{{ blog.author.profile_picture.url  }}" alt="">
+
+            {% else  %}
+            <img style="border-radius: 50%;" width="45"
+              src="{% static 'uploads/defaults/unknown_profile_picture.jpeg' %}" alt="">
+            {% endif %}
+
+
+
+            <a href="{% url 'profile' username=blog.author.username  %}"
+              class="usr text-start m-3">{{ blog.author.username }}</a>
+          </div>
+
+          <div class="col-md-6 col-sm-6 mt-2 text-end">
+            <div class="dropdown dropstart">
+
+              <span class="text-end dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
+                <i class="fal-3x fal fa-ellipsis-h"></i>
+              </span>
+
+              <ul style="box-shadow: 10px 10px 10px #cccbcb; box-shadow: none;"
+                class="dropdown-menu dropdown-menu-end mt-5" aria-labelledby="dropdownMenuClickableInside">
+                {% if blog.author == request.user %}
+                <li>
+                  <a class="dropdown-item" aria-current="page">
+                    <i class="far fa-pen me-2"></i>
+                    Edit</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" aria-current="page" href="{% url 'blogs:blog_delete' pk=blog.pk  %}">
+                    <i class="fas fa-trash me-2 text-danger"></i>
+                    Delete</a>
+                </li>
+                {% endif %}
+                <li>
+                  <a class="dropdown-item" aria-current="page">
+                    <i class="fas fa-bug me-2"></i>
+                    Report</a>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <img src="{{blog.image.url}}" class="card-img-top blog-image" alt="...">
+
+      <div class="bordered me-2 text-start m-4">
+        <i class="far fa-heart heart"></i>        
+      </div>
+      <small
+        class="blog-date text-start mt-1 text-muted">{{ blog.date_created.year }}-{{ blog.date_created.month }}-{{ blog.date_created.day }}</small>
+      <div class="card-body">
+        <!-- <h5 class="card-title">{{ blog.title }}</h5> -->
+        <p class="card-text text-start blog-body">{{blog.body}}</p>
+      </div>
+
+
+
+      <form action="{% url 'blogs:add_comment' blog_id=blog.pk  %}" method="post">
+        {% csrf_token %}
+        <div class="row pt-0">
+
+          <div class="col-md-4 col-sm-4 mt-0 text-end">
+
+            {% if request.user.profile_picture %}
+            <img style="border-radius: 50%" width="45" height="45" class="m-0 p-0" src="{{ request.user.profile_picture.url  }}"
+              alt="">
+
+            {% else  %}
+            <img style="border-radius: 50%;" width="45" height="45"
+              src="{% static 'uploads/defaults/unknown_profile_picture.jpeg' %}" alt="">
+            {% endif %}
+
+
+          </div>
+
+          <div class="col-md-4 col-sm-4 mt-0 text-start">
+
+            <input placeholder="Write your comment here" type="text" name="body" id="" required>
+          </div>
+          <div class="col-md-4 col-sm-4 mt-0 text-start">
+            <button class="btn btn-sm btn-primary">Comment</button>
+          </div>
+        </div>
+      </form>
+
+      <!-- comment section list -->
+      <div class="m-3 comment">
+        <ul class="list-group list-group-flush text-start border-0">
+
+          {% for comment in blog.comments.all %}
+          <li class="list-group-item border-0">
+
+
+            {% if comment.comment_by.profile_picture %}
+            <img width="45" src="{{comment.comment_by.profile_picture.url}}" class="rounded-circle" height="45"
+              alt="...">
+
+            {% else  %}
+            <img style="border-radius: 50%;" width="45"
+              src="{% static 'uploads/defaults/unknown_profile_picture.jpeg' %}" alt="">
+            {% endif %}
+
+
+            <small class="fw-bold">
+              <a href="{% url 'profile' username=comment.comment_by.username  %}">
+                {{comment.comment_by.username}}
+              </a>
+            </small>
+            <p class="m-5 mt-0">{{comment.body}}</p>
+          </li>
+          {% endfor  %}
+        </ul>
+      </div>
+
+
+    </div>
+    {% endfor %}
+  </div>
+  <!-- end -->
+</div>
+</div>
+
+{% endblock content %}

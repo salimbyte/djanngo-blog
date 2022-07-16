@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+  Login
+{% endblock title %}
+
+{% block content %}
+
+
+
+
+<div class="container-fluid">
+  
+  <div class="login-page m-auto form-group">
+    {% if messages%}
+      <div class="text-danger mb-3" role="alert">
+        {% for message in messages %}
+          {{message}}
+        {% endfor %}
+      </div>
+    {% endif %}
+    <form action="" method="post">
+      <h2 class="text-muted">
+        Login
+      </h2>
+      {% csrf_token %}
+      <label for="">Username</label>
+      <input class="form-control mb-3" name="username" type="text">
+  
+      <label for="">Password</label>
+      <input class="form-control mb-3" name="password" type="password">
+  
+      <div class="d-grid gap-2 col-12 mx-auto">
+        <button style="background:  linear-gradient(to bottom, #526ba6, #314b88);" type="submit" class="btn btn-info submit-button">
+          Log In
+        </button>
+      </div>
+  
+      <br>
+      <div class="mt-4 text-center">
+        <a href="{% url 'accounts:signup' %}">Don't have an account? </a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}

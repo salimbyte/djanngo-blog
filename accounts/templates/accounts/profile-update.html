@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static  %}
+
+{% block title %}Edit @{{ user.username }}{% endblock title %}
+
+{% block content %}
+
+
+
+<div class="container rounded bg-white mt-5 mb-5">
+
+
+    <div style="border: 1px solid rgb(219,219,219)" class="row profile-setting">
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                {% for e in form.errors  %}
+                <li>{{ e  }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% csrf_token %}
+        <div class="col-md-3 border-right">
+            <form enctype="multipart/form-data" action="{% url 'accounts:dp-update'  %}" method="POST">
+                {% csrf_token %}
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    
+                    <img name="profile_picture" width="150px" class="profile-picture" src="
+                        {% if user.profile_picture %} 
+                            {{ user.profile_picture.url  }}
+
+                            {% else  %}
+                                {% static 'uploads/defaults/unknown_profile_picture.jpeg' %}
+                        {% endif  %}" alt="...">
+                    <span class="font-weight-bold username">{{ request.user.first_name  }} {{ request.user.last_name  }}</span>
+                    <span>
+                        <input accept="image/*" name="profile_picture" id="dp" type="file" hidden />
+                        <label for="dp" class="change-profile-picture">
+                            Change Profile Photo
+                        </label>
+                        <br>
+                        {% if user.profile_picture %}
+                            <label for="clear-dp" class="remove-profile-picture">
+                                Remove
+                            </label>
+                            <input  class="profile_picture-clear" type="checkbox" name="clear-pp" id="clear-dp">
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary btn-sm">Upload</button>
+                        <P class="text-muted"><small>
+                            for picture changes to reflect
+                        </small></P>
+                    </span>
+                </div>
+            </form>
+        </div>
+        </form>
+
+
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <form style="display: inline-block" enctype="multipart/form-data" action="" method="POST">
+                    {% csrf_token %}
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels"><strong>First Name</strong></label>
+                            <input name="first_name" type="text" class="form-control"
+                                value="{{ request.user.first_name  }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">Last Name</label>
+                            <input name="last_name" type="text" class="form-control"
+                                value="{{ request.user.last_name  }}">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="labels">Username</label>
+                            <input name="username" type="text" class="form-control"
+                                value="{{ request.user.username  }}">
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="labels">Bio</label>
+                            <textarea name="bio" type="text" class="form-control">{{ request.user.bio  }}</textarea>
+                        </div>
+
+                        <div class="mt-3 col-md-12">
+                            <label class="labels">Gender</label>
+                            {{ form.gender}}
+                            <!-- <select name="gender" class="form-select form-select-sm">
+                            </select> -->
+
+                        </div>
+
+                    </div>
+                    <div class="mt-5">
+                        <button class="profile-submit-button btn btn-primary" type="submit">Submit</button>
+                    </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center experience">
+                    <span>Edit Contact</span>
+                </div>
+                <br>
+                <div class="col-md-12"><label class="labels">Mobile Number</label>
+                    <input name="phone_number" type="text" class="form-control" value="{{ request.user.phone_number }}">
+                </div>
+                <div class="col-md-12">
+                    <label class="labels">Email ID</label>
+                    <input name="email" type="text" class="form-control" value="{{ request.user.email  }}">
+                </div>
+            </div>
+        </div>
+
+       
+
+        </form>
+
+    </div>
+</div>
+{% endblock content %}

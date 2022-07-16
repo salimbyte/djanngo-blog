@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}MicroTape  @{{ user.username }}{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mt-5 align-items-center">
+        <div class="col-md-3 text-center mb-5">
+            <div class="avatar avatar-xl">
+                {% if user.profile_picture %}
+                    <img class="profile-picture" src="{{ user.profile_picture.url  }}" alt="...">
+                {% else  %}
+                    <img class="profile-picture" src="{% static 'uploads/defaults/unknown_profile_picture.jpeg' %}" alt="...">
+                {% endif  %}
+            </div>
+        </div>
+        <div class="col">
+            <div class="row align-items-center">
+                <div class="col-md-7">
+                    <h4 style="display: inline-block" class="mb-1">{{ user.username }}</h4>
+
+                    {% if user.is_varified %}   
+                        <span>
+                            <img class="variefied-logo" src="{% static 'icons/icon-yes.svg'  %}" alt="">
+                        </span>
+                    {% endif %}
+
+                    {% if user == request.user  %}
+                        <a class="edit-profile-button" href="{% url 'accounts:profile-update'  %}">Edit Profile</a>
+                    {% endif  %}
+                    <div class="ratings mt-3 mb-3">
+                        <strong>{{ user.blog_set.count }}</strong> 
+                        <span>blog{{ user.blog_set.count|pluralize }}</span>
+                        <strong>{{ user.blog_set.count }}</strong> 
+                        <span>audience{{ user.blog_set.count|pluralize }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-7">
+                    <p class="text-muted">{{ user.bio }}</p>
+                </div>
+                <!-- <div class="col">
+                    <p class="small mb-0 text-muted">Nec Urna Suscipit Ltd</p>
+                    <p class="small mb-0 text-muted">P.O. Box 464, 5975 Eget Avenue</p>
+                    <p class="small mb-0 text-muted">(537) 315-1481</p>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

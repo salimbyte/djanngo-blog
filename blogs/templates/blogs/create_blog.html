@@ -1,0 +1,31 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="exampleModalLabel">New blog</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form enctype="multipart/form-data" action="{% url 'blogs:blog_create'  %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Title:</label>
+                            <input placeholder="Title your blog" type="text" name="title" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Image:</label>
+                            <input type="file" name="image" accept="image/*" class="form-control" id="recipient-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Text:</label>
+                            <textarea name="body" placeholder="What's on your mind {{ request.user.username  }} ?" class="form-control" id="message-text"></textarea>
+                        </div>
+                        <div class="d-grid gap-2 col-12 mx-auto">
+                            <button type="submit" class="btn btn-info">Post</button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>

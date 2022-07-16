@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+
+/* GENERAL stylying */
+
+body {
+    background-color: #f4f4f4;
+    color: #262626;
+    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+img {
+    object-fit: cover;
+}
+
+.submit-button {
+    color: white;
+    font-weight: bold
+}
+
+.special-title {
+    color: wheat;
+    font-family: 'Sacramento', cursive;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+
+  
+}
+
+.special-title a:hover {
+    color: wheat;
+}
+
+
+
+/* NAV */
+.navbar {
+    color: #E1E8E6;
+    height: 50px;
+    border-bottom: 1px solid #2A66A5;
+    border-bottom-color: rgba(4, 40, 71, 0.8);
+    box-shadow: 0 1px 0 rgb(111 151 182 / 50%) inset, 0 -1px 0 rgb(111 151 182 / 20%) inset, 0px 1px 1px rgb(0 0 0 / 20%);
+
+    /* Top left: 50.6098%; top: 35.6863%; */
+    /* bottom left: 64.7059%; top: 46.6667%; */
+
+    background:  linear-gradient(to bottom, #526ba6, #314b88);
+    /* background: linear-gradient(0deg, rgba(48,135,130,1) 0%, rgba(82,166,161,1) 50%); */
+
+    background-size: 50%;    
+}
+
+.toggle-picture {
+    margin-right: 6rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #67DBD3
+}
+
+
+/* BLOG styling */
+.blog {
+    border: 1px solid;
+    text-align: center;
+    margin: 5px auto;
+    background: #ffffff;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    margin-bottom: 60px;
+    border: 1px solid #dbdbdb;
+    width: 55%;
+    border-radius: 0.2rem;
+}
+
+.blog .usr{
+    text-decoration: none;
+    color: #262626;
+}
+.blog .usr:hover{
+    text-decoration: underline;
+}
+
+.blog-header {
+    background-color: white
+}
+
+.blog-date {
+    margin-left: 0.8rem
+}
+
+.blog-image {
+    width: 100%
+}
+
+.blog-body {
+    color:#6DABA2;
+}
+
+.heart {
+    cursor: pointer;
+    cursor: pointer
+}
+
+/* PROFILE styling */
+.change-profile-picture {
+    color: #0095f6;
+    padding: 0.3rem;
+    font-family: sans-serif;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    /* margin-top: 1rem; */
+}
+
+.profile-submit-button {
+    background: #0B95F6;
+    padding: 0.3rem 0.5em;
+}
+
+.profile-setting .labels {
+    font-weight: bold;
+}
+
+.username {
+    font-weight: bolder;
+    font-family: 'Roboto', sans-serif;
+    text-transform: capitalize;
+    margin: 5px 10px;
+}
+
+.profile-picture {
+    width: 160px;
+    height: 160px;
+    border-radius: 50% !important;
+    border: 1px solid #6DABA2;
+}
+
+.edit-profile-button {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 5px 9px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000;
+    display: inline-block
+}
+
+
+.variefied-logo {
+    width: 20px;
+    margin-top: 0;
+    vertical-align: baseline;
+}
+
+
+/* POST */
+.pp {
+    border-radius: 10%;
+}
+
+
+
+/* LOGIN */
+
+.login-page, .signup-page {
+    background-color:#fff;
+    padding: 50px;
+    border: 1px solid #dbdbdb;
+    width: 50%;
+    box-shadow: 5px 5px 5px #6DABA2;
+    font-weight: 500;
+}
+
+.signup-page {
+    background-color: #fff;
+    padding: 50px;
+}
+
+@media (min-width:1200px) {
+    .login-page, .signup-page {
+        width: 40% !important;
+    }
+
+}
+
+/* device mobile */
+@media (max-width:1200px) {
+    .login-page, .signup-page {
+        width: 80% !important;
+    }
+
+    .toggle-picture {
+        margin-right: 1rem
+    }
+    .blog {
+        width: 100%;
+    }
+}
