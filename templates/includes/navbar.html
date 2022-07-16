@@ -1,0 +1,67 @@
+  {% load static %}
+  {% include "blogs/create_blog.html" %}
+  <nav class="navbar navbar-expand-lg sticky-top mb-3">
+    <div class="container-fluid">
+
+      <a class="ml-3 navbar-brand special-title" href="{% url 'blogs' %}">
+        MicroTape
+      </a>
+
+      <div class="d-flex">
+        {% if request.user.is_authenticated %}
+        <span type="button" class="me-3 mt-auto mb-auto text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <i class="fas fa-plus"></i>
+        </span>
+        
+
+        <div class="dropdown dropstart">
+
+          {% if request.user.profile_picture  %}
+          <img class="toggle-picture" src="{{ user.profile_picture.url  }}" type="button"
+            class="btn btn-secondary dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+          {% else  %}
+          <img class="toggle-picture"
+            src="{% static 'uploads/defaults/unknown_profile_picture.jpeg' %}" type="button"
+            class="btn btn-secondary dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+          {% endif  %}
+
+          <ul style="box-shadow: 10px 10px 10px #cccbcb;" class="dropdown-menu dropdown-menu-end mt-5" aria-labelledby="dropdownMenuClickableInside">
+            <li>
+
+              <a class="dropdown-item" aria-current="page"
+                href="{% url 'profile' username=request.user.username  %}">
+                <i class="far fa-user-circle me-2"></i>
+                Profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" aria-current="page" href="{% url 'accounts:profile-update' %}">
+                <i class="fas fa-cog me-2"></i>
+                Setting</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item" aria-current="page" href="{% url 'accounts:logout' %}">
+                <i class="fas fa-sign-out-alt me-2"></i>
+                Logout</a>
+            </li>
+          </ul>
+
+        </div>
+        {% else  %}
+
+        <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'accounts:login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'accounts:signup' %}">SignUp</a>
+          </li>
+        </ul> -->
+
+        {% endif %}
+      </div>
+    </div>
+  </nav>
